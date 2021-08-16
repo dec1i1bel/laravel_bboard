@@ -19,5 +19,5 @@ Route::get('/create', function() {
 });
 
 Route::get('/', [BbsController::class, 'index']);
-Route::get('/{bb}', [BbsController::class, 'detail']);
+Route::get('/{bb}', [BbsController::class, 'detail']); // bb - url-параметр с именем bb
 Route::post('/store' , [BbsController::class, 'store']);

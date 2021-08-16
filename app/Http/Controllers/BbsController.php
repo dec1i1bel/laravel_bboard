@@ -38,7 +38,13 @@ class BbsController extends Controller
     /**
      * вывод детальной страницы поста
      */
-    public function detail($bb) {
-        
+    public function detail(Bbs $bb) {
+        $s = $bb->title . '<br><br>';
+        $s .= $bb->content . '<br>';
+        $s .= $bb->price . ' руб.<br>';
+        $s .= '<img class="img-item-detail" src="'.$bb->file.'" style="width:700px;height:700px;"><br>';
+
+        return response($s)
+            ->header('Content-type', 'text/html');
     }
 }

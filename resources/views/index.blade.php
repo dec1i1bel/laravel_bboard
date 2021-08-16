@@ -8,7 +8,7 @@
                 описание: {{ $bb->content }}<br>
                 цена: {{ $bb->price }}<br>
                 фото:<br>
-                <img src="{{ $bb->file }}" alt="" style="width: 300px; height: 300px">
+                <img src="{{ $bb->file }}" alt="" class="img-item-preview">
             </div>
         @endforeach
     </div>
