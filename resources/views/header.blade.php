@@ -8,3 +8,5 @@
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 </head>
 <body>
+    <div class="container">
+        <p>HEADER</p>
