@@ -1,6 +1,8 @@
-@include('header')
-    <h1>BBoard</h1>
-    <a href="/create">Create post</a><br><br>
+@extends('layouts.base')
+
+@section('title', 'Main')
+
+@section('main')
     @if (count($bbs) > 0)
         <div id="posts">
             @foreach ($bbs as $bb)
@@ -10,9 +12,9 @@
                     price: {{ $bb->price }}<br>
                     photo:<br>
                     <img src="{{ $bb->file }}" alt="" class="img-item-preview"><br>
-                    <a href="/{{ $bb->id }}/">Details...</a>
+                    <a href="{{ route('detail', ['bb' => $bb->id]) }}">Details...</a>
                 </div>
             @endforeach
         </div>
     @endif
-@include('footer')
+@endsection('main')

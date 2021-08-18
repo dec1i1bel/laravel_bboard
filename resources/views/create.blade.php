@@ -1,4 +1,8 @@
-@include('header')
+@extends('layouts.base')
+
+@section('title', 'New post')
+    
+@section('main')
     <form action="/store" method="post" enctype="multipart/form-data">
         @csrf
         <input type="text" name="title" id="title" placeholder="название товара" /><br>
@@ -8,4 +12,4 @@
         <br>
         <input type="submit" value="Create"><br>
     </form>
-@include('footer')
+@endsection('main') 

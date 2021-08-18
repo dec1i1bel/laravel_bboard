@@ -18,6 +18,6 @@ Route::get('/create', function() {
     return view('/create');
 });
 
-Route::get('/', [BbsController::class, 'index']);
-Route::get('/{bb}', [BbsController::class, 'detail']); // bb - url-параметр с именем bb
+Route::get('/', [BbsController::class, 'index'])->name('index');
+Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail'); // bb - url-параметр с именем bb
 Route::post('/store' , [BbsController::class, 'store']);
