@@ -18,7 +18,23 @@ class CreateBbsTable extends Migration
             $table->string('title', 50);
             $table->text('content');
             $table->float('price');
-            $table->timestamps(); // имя поля по умолчанию - 'created_at'
+
+            /**
+             * создаём поле внешнего ключа FOREIGN_ID
+             * 
+             * foreignId() - создаёт поле внешнего ключа c именем 'user_id' для связи с другой таблицей и возвращает её объект
+             * 
+             * constrained() - извлекает из имени user_id имя связываемой таблицы 'users' и её ключевое поле 'id'
+             * 
+             * onDelete() - указывает, что делать во вторичной таблице при удалении записей из первичной.
+             *   здесь 'cascade' указывает на каскадное удаление
+             */
+            $table->foreignId('user_id')->constrained()
+                ->onDelete('cascade');
+            
+            // создаются поля created_at и modified_at
+            $table->timestamps();
+
             $table->index('created_ad'); // создаём индекс по полю для ускорения сортировки по нему
         });
     }
