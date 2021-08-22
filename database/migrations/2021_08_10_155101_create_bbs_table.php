@@ -13,7 +13,7 @@ class CreateBbsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bbs', function (Blueprint $table) {
+        Schema::create('bb', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50);
             $table->text('content');
@@ -46,6 +46,6 @@ class CreateBbsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bbs');
+        Schema::dropIfExists('bb');
     }
 }

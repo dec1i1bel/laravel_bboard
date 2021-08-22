@@ -11,7 +11,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Bbs extends Model
+class Bb extends Model
 {
     // use HasFactory;
 

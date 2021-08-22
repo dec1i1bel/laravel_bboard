@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Bbs;
+use App\Models\Bb;
 
 class BbsController extends Controller
 {
@@ -12,7 +12,7 @@ class BbsController extends Controller
      * вывод списка постов
      */
     public function index() {
-        $context = ['bbs' => Bbs::latest()->get()];
+        $context = ['bbs' => Bb::latest()->get()];
 
         /**
          * index - имя шаблона без ".blade.php"
@@ -27,14 +27,14 @@ class BbsController extends Controller
     public function store(Request $request) {
         $file = $request->file('file')->store('public');
 
-        $bbs = new Bbs();
+        $bb = new Bb();
 
-        $bbs->title = request('title');
-        $bbs->content = request('content');
-        $bbs->price = request('price'); 
-        $bbs->file = Storage::url($file);
+        $bb->title = request('title');
+        $bb->content = request('content');
+        $bb->price = request('price'); 
+        $bb->file = Storage::url($file);
 
-        $bbs->save();
+        $bb->save();
 
         return redirect('/');
     }
@@ -42,7 +42,7 @@ class BbsController extends Controller
     /**
      * вывод детальной страницы поста
      */
-    public function detail(Bbs $bb) {
+    public function detail(Bb $bb) {
         return view('detail', ['bb' => $bb]);
     }
 }

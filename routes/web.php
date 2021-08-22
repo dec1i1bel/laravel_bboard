@@ -19,5 +19,21 @@ Route::get('/create', function() {
 });
 
 Route::get('/', [BbsController::class, 'index'])->name('index');
-Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail'); // bb - url-параметр с именем bb
 Route::post('/store' , [BbsController::class, 'store']);
+
+/**
+ * метод создаёт маршруты на действия контроллеров, созданных через php artisan ui:auth
+ * также здесь создаются настройки безопасности
+ */
+Auth::routes();
+
+/**
+ * вывод раздела пользователя
+ * 
+ * name('home') - имя маршрута (не путь в url)
+ */
+Route::get('/home', 
+            [App\Http\Controllers\HomeController::class, 'index'])
+        ->name('home');
+
+Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail'); // bb - url-параметр с именем bb

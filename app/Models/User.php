@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Bbs;
+use App\Models\Bb;
 
 class User extends Authenticatable
 {
@@ -46,6 +46,6 @@ class User extends Authenticatable
      * объявляем связь модели с таблицей bbs
      */
     public function bbs() {
-        return $this->hasMany(Bbs::class);
+        return $this->hasMany(Bb::class);
     }
 }
