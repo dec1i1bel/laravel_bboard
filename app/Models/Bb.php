@@ -22,7 +22,8 @@ class Bb extends Model
     protected $fillable = [
         'title',
         'content',
-        'price'
+        'price',
+        'file'
     ];
 
     /**

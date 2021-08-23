@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BbsController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,12 @@ use App\Http\Controllers\BbsController;
 |
 */
 
-Route::get('/create', function() {
-    return view('/create');
-});
+// Route::get('/create', function() {
+//     return view('/create');
+// });
 
 Route::get('/', [BbsController::class, 'index'])->name('index');
-Route::post('/store' , [BbsController::class, 'store']);
+// Route::post('/store' , [BbsController::class, 'store']);
 
 /**
  * метод создаёт маршруты на действия контроллеров, созданных через php artisan ui:auth
@@ -28,12 +29,17 @@ Route::post('/store' , [BbsController::class, 'store']);
 Auth::routes();
 
 /**
- * вывод раздела пользователя
+ * /home - раздела пользователя
  * 
- * name('home') - имя маршрута (не путь в url)
+ * name('home') - имя маршрута
  */
-Route::get('/home', 
-            [App\Http\Controllers\HomeController::class, 'index'])
-        ->name('home');
+Route::get('/home', [HomeController::class, 'index'])
+    ->name('home');
+
+Route::get('/home/add', [HomeController::class, 'showAddBbform'])    
+    ->name('bb.add');
+
+Route::post('/home', [HomeController::class, 'storeBb'])
+    ->name('bb.store');
 
 Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail'); // bb - url-параметр с именем bb

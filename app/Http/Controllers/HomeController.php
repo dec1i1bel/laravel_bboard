@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -28,5 +29,20 @@ class HomeController extends Controller
             'home',
             ['bbs' => Auth::user()->bbs()->latest()->get()]
         );
+    }
+
+    public function showAddBbForm() {
+        return view('bb_add');
+    }
+
+    public function storeBb(Request $request)
+    {
+        Auth::user()->bbs()->create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'price' => $request->price
+        ]);
+
+        return redirect()->route('home');
     }
 }

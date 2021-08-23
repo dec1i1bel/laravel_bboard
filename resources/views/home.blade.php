@@ -3,7 +3,7 @@
 @section('title', 'My posts')
 
 @section('main')
-<p class="text-end"><a href="">End aligned text on all viewport sizes.</a></p>
+<p class="text-end"><a href="{{ route('bb.add') }}">Create post</a></p>
 
     <table class="table table-hover">
         <thead>

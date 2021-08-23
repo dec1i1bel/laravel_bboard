@@ -22,24 +22,6 @@ class BbsController extends Controller
     }
 
     /**
-     * сохранение поста
-     */
-    public function store(Request $request) {
-        $file = $request->file('file')->store('public');
-
-        $bb = new Bb();
-
-        $bb->title = request('title');
-        $bb->content = request('content');
-        $bb->price = request('price'); 
-        $bb->file = Storage::url($file);
-
-        $bb->save();
-
-        return redirect('/');
-    }
-
-    /**
      * вывод детальной страницы поста
      */
     public function detail(Bb $bb) {
