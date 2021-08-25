@@ -19,7 +19,12 @@
                     <td>{{ $bb->title }}</td>
                     <td>{{ $bb->price }}</td>
                     <td>
-                        <i class="fas fa-edit"></i>&nbsp;<i class="far fa-trash-alt"></i>
+                        <a href="{{ route('bb.edit', ['bb' => $bb->id]) }}">
+                            <i class="fas fa-edit"></i>
+                        </a>&nbsp;|&nbsp;
+                        <a href="{{ route('bb.delete', ['bb' => $bb->id]) }}">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

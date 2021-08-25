@@ -18,6 +18,7 @@ class CreateBbsTable extends Migration
             $table->string('title', 50);
             $table->text('content');
             $table->float('price');
+            $table->string('file')->nullable(); // необязательное поле
 
             /**
              * создаём поле внешнего ключа FOREIGN_ID
