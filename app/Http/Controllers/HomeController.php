@@ -38,10 +38,13 @@ class HomeController extends Controller
 
     public function storeBb(Request $request)
     {
+        $file = request()->file;
+        $fstore = Storage::putfile('public', $file);
         Auth::user()->bbs()->create([
             'title' => $request->title,
             'content' => $request->content,
-            'price' => $request->price
+            'price' => $request->price,
+            'file' => $fstore
         ]);
 
         return redirect()->route('home');

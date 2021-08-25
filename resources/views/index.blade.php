@@ -11,7 +11,7 @@
                     description: {{ $bb->content }}<br>
                     price: {{ $bb->price }}<br>
                     photo:<br>
-                    <img src="{{ $bb->file }}" alt="" class="img-item-preview"><br>
+                    <img src="{{ Storage::url($bb->file) }}" alt="" class="img-item-preview"><br>
                     <a href="{{ route('detail', ['bb' => $bb->id]) }}">Details...</a>
                 </div>
             @endforeach
