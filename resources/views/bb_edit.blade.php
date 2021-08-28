@@ -7,13 +7,34 @@
         @csrf
         @method('PATCH')
         <div class="form-group">
-            <input class="form-control" type="text" placeholder="Название" name="title" id="title" value="{{ $bb->title }}">
+            <input class="form-control @error('content')
+            is-invalid 
+            @enderror" type="text" placeholder="Post title" name="title" id="title" value="{{ old('title', $bb->title) }}">
+            @error('title')
+                <span class="invalid-feedback">
+                    <strong>{{ $message }}</strong>    
+                </span>    
+            @enderror
         </div>
         <div class="form-group">
-            <textarea name="content" id="content" placeholder="Enter desciption" rows="10" cols="100">{{ $bb->content }}</textarea>
+            <textarea class="form-control @error('content')
+                is-invalid 
+            @enderror" name="content" id="content" placeholder="Enter desciption" rows="5">{{ old('content', $bb->content) }}</textarea>
+            @error('content')
+                <span class="invalid-feedback">
+                    <strong>{{ $message }}</strong>    
+                </span>    
+            @enderror
         </div>
         <div class="form-group">
-            <input type="number" name="price" id="price" class="form-control" value="{{ $bb->price }}">
+            <input class="form-control @error('price')
+                is-invalid
+            @enderror" type="number" name="price" id="price" value="{{ $bb->price }}">
+            @error('price')
+                <span class="invalid-feedback">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
         <input type="submit" value="Save" class="btn btn-outline-success">
     </form>

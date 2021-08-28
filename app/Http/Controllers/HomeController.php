@@ -9,6 +9,18 @@ use App\Models\Bb;
 
 class HomeController extends Controller
 {
+    private const BB_VALIDATOR = [
+        'title' => 'required|max:50',
+        'content' => 'required',
+        'price' => 'required|numeric'
+    ];
+
+    private const BB_ERROR_MESSAGES = [
+        'price.required' => 'У товара должна быть цена',
+        'required' => 'Поле должно быть заполнено',
+        'max' => 'Длина вводимого значения не должна быть больше :max символов',
+        'numeric' => 'Допустимы только цифры'
+    ];
     /**
      * Create a new controller instance.
      *
@@ -38,12 +50,18 @@ class HomeController extends Controller
 
     public function storeBb(Request $request)
     {
+        // @toDo create validation rule fo file
         $file = request()->file;
-        $fstore = Storage::putfile('public', $file);
+        $fstore = Storage::putFile('public', $file);
+
+        $validated = $request->validate(
+            self::BB_VALIDATOR,
+            self::BB_ERROR_MESSAGES
+        );
         Auth::user()->bbs()->create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'price' => $request->price,
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'price' => $validated['price'],
             'file' => $fstore
         ]);
 
@@ -57,10 +75,17 @@ class HomeController extends Controller
 
     public function updateBb(Request $request, Bb $bb)
     {
+        $validated = $request->validate(
+            self::BB_VALIDATOR,
+            self::BB_ERROR_MESSAGES
+        );
         $bb->fill([
-            'title' => $request->title,
-            'content' => $request->content,
-            'price' => $request->price
+            // 'title' => $request->title,
+            // 'content' => $request->content,
+            // 'price' => $request->price
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'price' => $validated['price']
         ]);
         $bb->save();
         return redirect()->route('home');
