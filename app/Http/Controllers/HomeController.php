@@ -9,17 +9,26 @@ use App\Models\Bb;
 
 class HomeController extends Controller
 {
+    /**
+     * валидаторы полей форм создания и редактирования поста
+     */
     private const BB_VALIDATOR = [
         'title' => 'required|max:50',
         'content' => 'required',
-        'price' => 'required|numeric'
+        'price' => 'required|numeric',
+        'file' => 'nullable|image|max:1024'
     ];
 
+    /**
+     * сообщения об ошибках для валидаторов
+     */
     private const BB_ERROR_MESSAGES = [
         'price.required' => 'У товара должна быть цена',
         'required' => 'Поле должно быть заполнено',
         'max' => 'Длина вводимого значения не должна быть больше :max символов',
-        'numeric' => 'Допустимы только цифры'
+        'numeric' => 'Допустимы только цифры',
+        'file.image' => 'Загружаемый файл должен быть изображением',
+        'file.max' => 'размер изображения - не более 1 Мб'
     ];
     /**
      * Create a new controller instance.
@@ -48,16 +57,25 @@ class HomeController extends Controller
         return view('bb_add');
     }
 
+    /**
+     * сохранение поста, валидация
+     * 
+     * @return redirect()
+     */
     public function storeBb(Request $request)
     {
-        // @toDo create validation rule fo file
-        $file = request()->file;
-        $fstore = Storage::putFile('public', $file);
-
         $validated = $request->validate(
             self::BB_VALIDATOR,
             self::BB_ERROR_MESSAGES
         );
+
+        if (isset($validated['file']) && null !== $validated['file']) {
+            $file = $validated['file'];
+            $fstore = Storage::putFile('public', $file);
+        } else {
+            $fstore = false;
+        }
+
         Auth::user()->bbs()->create([
             'title' => $validated['title'],
             'content' => $validated['content'],
@@ -68,6 +86,13 @@ class HomeController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * вывод формы редактирования поста
+     * 
+     * @param Bb $bb модель поста
+     * 
+     * @return view
+     */
     public function showEditBbForm(Bb $bb)
     {
         return view('bb_edit', ['bb' => $bb]);
@@ -80,9 +105,6 @@ class HomeController extends Controller
             self::BB_ERROR_MESSAGES
         );
         $bb->fill([
-            // 'title' => $request->title,
-            // 'content' => $request->content,
-            // 'price' => $request->price
             'title' => $validated['title'],
             'content' => $validated['content'],
             'price' => $validated['price']

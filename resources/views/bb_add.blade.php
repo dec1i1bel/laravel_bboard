@@ -36,7 +36,14 @@
             @enderror
         </div>
         <div class="form-group">
-            <input type="file" name="file" id="file">
+            <input class="form-control @error('file')
+                is-invalid
+            @enderror" type="file" name="file" id="file" value="{{ old('file') }}">
+            @error('file')
+                <span class="invalid-feedback">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
         <input type="submit" value="Send" class="btn btn-outline-success">
     </form>

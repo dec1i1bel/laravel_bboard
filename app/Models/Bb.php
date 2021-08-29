@@ -22,12 +22,11 @@ class Bb extends Model
     protected $fillable = [
         'title',
         'content',
-        'price',
-        'file'
+        'price'
     ];
 
     /**
-     * вторая часть связи между таблицами для вторичной таблицы
+     * связь между таблицами
      */
     public function user()
     {
