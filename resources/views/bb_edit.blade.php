@@ -7,8 +7,8 @@
         @csrf
         @method('PATCH')
         <div class="form-group">
-            <input class="form-control @error('content')
-            is-invalid 
+            <input class="form-control @error('title')
+                is-invalid 
             @enderror" type="text" placeholder="Post title" name="title" id="title" value="{{ old('title', $bb->title) }}">
             @error('title')
                 <span class="invalid-feedback">
@@ -29,8 +29,18 @@
         <div class="form-group">
             <input class="form-control @error('price')
                 is-invalid
-            @enderror" type="number" name="price" id="price" value="{{ $bb->price }}">
+            @enderror" type="number" name="price" id="price" value="{{ old('price', $bb->price) }}">
             @error('price')
+                <span class="invalid-feedback">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <div class="form-group">
+            <input class="form-control @error('file')
+                is-invalid
+            @enderror" type="file" name="file" id="file" value="{{ old('file', $bb->file) }}">
+            @error('file')
                 <span class="invalid-feedback">
                     <strong>{{ $message }}</strong>
                 </span>
