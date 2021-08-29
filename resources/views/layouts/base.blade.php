@@ -29,19 +29,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">My posts</a>
+                        
                     </li>
                 </ul>
-                <form action="{{ route('logout') }}" method="post">
-                    @csrf
-                    <input type="submit" value="Logout" class="btn btn-light">
-                </form>
+                @auth
+                    <span>{{ Auth::user()->name }}</span>
+                    <a class="nav-link" href="{{ route('home') }}">My posts</a>    
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <input type="submit" value="Logout" class="btn btn-link">
+                    </form>
+                @endauth
+                @guest
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                @endguest
+                
             </div>
         </div>
     </nav>
