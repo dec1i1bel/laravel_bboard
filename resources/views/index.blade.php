@@ -3,6 +3,9 @@
 @section('title', 'Main')
 
 @section('main')
+    @auth
+        <p class="text-end"><a href="{{ route('bb.add') }}">Create post</a></p>
+    @endauth
     @if (count($bbs) > 0)
         <div id="posts">
             @foreach ($bbs as $bb)

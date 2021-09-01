@@ -7,8 +7,7 @@
     <p>{{ $bb->content }}</p>
     <p>{{ $bb->price }}</p>
     <p>seller: {{ $bb->user->name }}</p>
-    <img class="img-item-detail" src="{{ $bb->file }}" alt="">
-    <p>Автор: {{ $bb->user->name }}</p>
+    <img class="img-item-detail" src="{{ Storage::url($bb->file) }}" alt="">
 
     <form action="{{ route('bb.destroy', ['bb' => $bb->id]) }}" method="post">
         @csrf

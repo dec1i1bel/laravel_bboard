@@ -16,7 +16,7 @@ class HomeController extends Controller
         'title' => 'required|max:50',
         'content' => 'required',
         'price' => 'required|numeric',
-        'file' => 'nullable|image|max:1024'
+        'file' => 'image|max:1024'
     ];
 
     /**
@@ -69,12 +69,18 @@ class HomeController extends Controller
             self::BB_ERROR_MESSAGES
         );
 
+        // echo '<h4>validated</h4><pre>';print_r($validated);echo '</pre>';
+        // die();
+
         if (isset($validated['file']) && null !== $validated['file']) {
             $file = $validated['file'];
             $fstore = Storage::putFile('public', $file);
         } else {
             $fstore = false;
         }
+
+        // echo '<h4>fstore</h4><pre>';print_r($fstore);echo '</pre>';
+        // die();
 
         Auth::user()->bbs()->create([
             'title' => $validated['title'],
@@ -104,10 +110,20 @@ class HomeController extends Controller
             self::BB_VALIDATOR,
             self::BB_ERROR_MESSAGES
         );
+
+        
+        if (isset($validated['file']) && null !== $validated['file']) {
+            $file = $validated['file'];
+            $fstore = Storage::putFile('public', $file);
+        } else {
+            $fstore = false;
+        }
+        
         $bb->fill([
             'title' => $validated['title'],
             'content' => $validated['content'],
-            'price' => $validated['price']
+            'price' => $validated['price'],
+            'file' => $fstore
         ]);
         $bb->save();
         return redirect()->route('home');

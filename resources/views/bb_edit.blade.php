@@ -3,7 +3,7 @@
 @section('title', 'Edit post')
 
 @section('main')
-    <form action="{{ route('bb.update', ['bb' => $bb->id]) }}" method="post" method="multipart/form-data">
+    <form action="{{ route('bb.update', ['bb' => $bb->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
