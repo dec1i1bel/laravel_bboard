@@ -8,5 +8,5 @@
     <p>{{ $bb->price }}</p>
     <p>seller: {{ $bb->user->name }}</p>
     <img class="img-item-detail" src="{{ Storage::url($bb->file)}}" alt="">
-    <p><a href="{{ route('index') }}">Back to list</a></p>
+    <p><a href="{{ route('index') }}">Go to main page</a></p>
 @endsection('main')

@@ -3,31 +3,40 @@
 @section('title', 'My posts')
 
 @section('main')
-<p class="text-end"><a href="{{ route('bb.add') }}">Create post</a></p>
+    <h2>My Items</h2>
+    <div class="table-responsive-lg">
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Item name</th>
-                <th scope="col">Price</th>
-                <th scope="col">#</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($bbs as $bb)
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <td>{{ $bb->title }}</td>
-                    <td>{{ $bb->price }}</td>
-                    <td>
-                        <a href="{{ route('bb.edit', ['bb' => $bb->id]) }}">
-                            <i class="fas fa-edit"></i>
-                        </a>&nbsp;|&nbsp;
-                        <a href="{{ route('bb.delete', ['bb' => $bb->id]) }}">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
-                    </td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($bbs as $bb)
+                    <tr class="account_item__row">
+                        <td>{{ $bb->title }}</td>
+                        <td>{{ $bb->content }}</td>
+                        <td>{{ $bb->price }}</td>
+                        <td><div class="account_item__img--preview" style="background-image: url('{{ Storage::url($bb->file) }}')"></div></td>
+                        <td>
+                            <a href="{{ route('detail', ['bb' => $bb->id]) }}">
+                                open
+                            </a>&nbsp;|&nbsp;
+                            <a href="{{ route('bb.edit', ['bb' => $bb->id]) }}">
+                                edit
+                            </a>&nbsp;|&nbsp;
+                            <a href="{{ route('bb.delete', ['bb' => $bb->id]) }}">
+                                delete
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

@@ -5,15 +5,44 @@
 }
 
 .post {
-    margin: 10px;
+    padding: 10px;
 }
 
-.img-item-preview {
+.post:hover {
+    -webkit-box-shadow: 1px 4px 14px 0px rgba(3, 21, 34, 0.2);
+    -moz-box-shadow: 1px 4px 14px 0px rgba(3, 21, 34, 0.2);
+    box-shadow: 1px 4px 14px 0px rgba(3, 21, 34, 0.2);
+}
+
+.post_link {
+    color: gray;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.post_img--preview {
     width: 300px;
     height: 300px;
+    background-size: cover;
+    background-position: top;
 }
 
 .img-item-detail {
     width: 500px;
     height: 500px;
+}
+
+.account_item__img--preview {
+    width: 100px;
+    height: 50px;
+    background-size: cover;
+    background-position: top;
+}
+
+.account_item__row td {
+    vertical-align: middle;
+}
+
+#footer {
+    height: 100px;
 }

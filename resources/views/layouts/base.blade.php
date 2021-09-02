@@ -12,45 +12,70 @@
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/689a977d1f.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <h1>BBoard</h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        
-                    </li>
-                </ul>
-                @auth
-                    <span>{{ Auth::user()->name }}</span>
-                    <a class="nav-link" href="{{ route('home') }}">My posts</a>    
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <input type="submit" value="Logout" class="btn btn-link">
-                    </form>
-                @endauth
-                @guest
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                @endguest
-                
+            <div class="container d-flex justify-content-between">
+                <div class="header_logo d-inline-flex">
+                    <a class="navbar-brand" href="/">
+                        <h1>BBoard</h1>
+                    </a>
+                </div>
+                <div class="header_nav--user d-inline-flex">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        @auth
+                            <div class="btn-group">
+                                <a href="{{ route('home') }}" type="button"
+                                    class="btn btn-outline-success">{{ Auth::user()->name }}</a>
+                                <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ route('bb.add') }}" class="dropdown-item">Create post</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-item p-0">
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                <input type="submit" value="Logout"
+                                                    class="btn btn-link text-decoration-none link-success w-100 h-100">
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endauth
+                        @guest
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        @endguest
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div id="main" class="container">
         @yield('main')
     </div>
+
+    <div id="footer" class="container-fluid bg-light">
+        <div class="container bg-light h-100">
+            тестовый сайт на laravel 8
+        </div>
+    </div>
+    <script src="{{ asset('js/app.js') }}" crossorigin="anonymous"></script>
 </body>
 
 </html>
