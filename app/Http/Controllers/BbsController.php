@@ -12,13 +12,10 @@ class BbsController extends Controller
      * вывод списка постов
      */
     public function index() {
-        $context = ['bbs' => Bb::latest()->get()];
-
-        /**
-         * index - имя шаблона без ".blade.php"
-         * $context - контекст шаблона
-         */
-        return view('index', $context);
+        // $context = ['bbs' => Bb::latest()->get()];
+        
+        // return view('index', $context);
+        return view('index');
     }
 
     /**
