@@ -13,7 +13,7 @@ class CreateBbsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bb', function (Blueprint $table) {
+        Schema::create('bbs', function (Blueprint $table) {
             $table->id();
             $table->string('title', 50);
             $table->text('content');
@@ -36,7 +36,7 @@ class CreateBbsTable extends Migration
             // создаются поля created_at и modified_at
             $table->timestamps();
 
-            $table->index('created_ad'); // создаём индекс по полю для ускорения сортировки по нему
+            $table->index('created_at'); // создаём индекс по полю для ускорения сортировки по нему
         });
     }
 
@@ -47,6 +47,6 @@ class CreateBbsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bb');
+        Schema::dropIfExists('bbs');
     }
 }
